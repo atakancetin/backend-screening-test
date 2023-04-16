@@ -144,13 +144,11 @@ namespace BackEnd.Screening.Business
         #region business flow.
         private void Login()
         {
-            Console.WriteLine($"page {Url} SearchAndClick working!");
             string openLoginScreenScript = _scriptBuilder.GenerateLoginScript(Username, Password);
             browser.EvaluateScriptAsync(openLoginScreenScript).ContinueWith(t =>
             {
                 if (t.Result != null && t.Result.Success)
                 {
-                    Console.WriteLine(t);
                     ScreenTestStateManagement.IsLoggedIn = true;
                     ScreenTestStateManagement.RedirectToLogin = true;
                 }
@@ -165,7 +163,6 @@ namespace BackEnd.Screening.Business
                 {
                     string expectedResult = "Hi, john g";
                     ScreenTestStateManagement.IsLoginSuccessfully = x.Result.Result.ToString() == expectedResult;
-                    Console.WriteLine(x.Result.Result.ToString());
                 }
             });
         }
@@ -176,7 +173,6 @@ namespace BackEnd.Screening.Business
             {
                 if (x.Result != null && x.Result.Success)
                 {
-                    Console.WriteLine(x);
                     ScreenTestStateManagement.FilteredSearch = true;
                 }
             });
@@ -282,7 +278,6 @@ namespace BackEnd.Screening.Business
             {
                 if (x.Result != null && x.Result.Success)
                 {
-                    Console.WriteLine(x);
                     ScreenTestStateManagement.ResetGatherinStates();
                 }
             });
